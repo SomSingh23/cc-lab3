@@ -20,9 +20,6 @@ app.get("/signup", (req, res) => {
 app.get("/login", (req, res) => {
   return res.render("login");
 });
-app.get("/protected", (req, res) => {
-  return res.render("protect");
-});
 
 // post routes start here
 
@@ -34,6 +31,33 @@ app.post("/signup", async (req, res) => {
     await newUser.save();
     return res.redirect("login");
   } catch (err) {
+    console.log(err);
     return res.redirect("/");
   }
+});
+
+app.post("/login", async (req, res) => {
+  let data = await User.findOne({
+    username: req.body.username,
+    password: req.body.password,
+  });
+  if (!data) {
+    return res.json({
+      message: "Username or Password Invalid",
+    });
+  }
+  return res.render("success", {
+    password: req.body.password,
+    username: req.body.username,
+  });
+});
+
+app.post("/final_login", async (req, res) => {
+  let data = await User.findOne({
+    lastname: req.body.lastname,
+  });
+  if (!data) {
+    return res.json({ message: "Wrong Last Name" });
+  }
+  return res.send(data);
 });
