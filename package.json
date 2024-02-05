@@ -1,0 +1,10 @@
+{
+  "name": "cc_lab3_ps_1",
+  "version": "1.0.0",
+  "description": "this is cloud computing lab3 problem statement 1",
+  "main": "index.js",
+  "repository": "git@github.com:SomSingh23/cc-lab3.git",
+  "author": "som singh lodhi",
+  "license": "yes",
+  "private": false
+}
