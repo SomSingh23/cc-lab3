@@ -1,6 +1,7 @@
+require("dotenv").config();
 let mongoose = require("mongoose");
 mongoose
-  .connect("mongodb://127.0.0.1:27017/cloudComputing_lab3_ps1")
+  .connect(process.env.URL)
   .then((p) => {
     console.log("connected to local mongoDB");
   })

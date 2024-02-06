@@ -1,3 +1,4 @@
+require("dotenv").config();
 let express = require("express");
 let app = express();
 let User = require("./user");
@@ -8,8 +9,8 @@ app.use(express.static("public"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.listen(5001, () => {
-  console.log("Up and Running on 5k+1");
+app.listen(process.env.PORT, () => {
+  console.log(`Up and Running on ${process.env.PORT}`);
 });
 app.get("/", (req, res) => {
   return res.render("home");
