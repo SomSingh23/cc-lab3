@@ -1,8 +1,11 @@
 require("dotenv").config();
+let path = require("path");
 let express = require("express");
 let app = express();
 let User = require("./user");
+
 app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, "views")));
 app.use(express.static("public"));
 
 // middlewares to parse req.body
