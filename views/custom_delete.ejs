@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deleting</title>
+  </head>
+  <body>
+    <hr></hr>
+    <h1><%=data.username%> Details</h1>
+
+    <p>Username: <b><%=data.username%></b></p>
+    <p>Email: <b><%=data.emailaddress%></b></p>
+    <p>Date of Birth : <b><%=data.dateofbirth%></b></p>
+    <p>Are you sure you want to delete User <b><%=data.username%></b></p>
+   
+    <form action="/admin_delete/<%=data._id%>" method="POST">
+      <button type="submit">Delete <%=data.usernama%></button>
+      <hr></hr>
+  </body>
+</html>

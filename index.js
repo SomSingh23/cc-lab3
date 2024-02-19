@@ -25,6 +25,21 @@ app.get("/signup", (req, res) => {
 app.get("/login", (req, res) => {
   return res.render("login");
 });
+app.get("/admin", (req, res) => {
+  res.render("admin");
+});
+// admin routes start here
+app.get("/admin_delete/:id", async (req, res) => {
+  try {
+    let data = await User.findOne({ _id: req.params.id });
+    if (!data) {
+      return res.json({ message: "Invalid ID or User is Deleted By Admin" });
+    }
+    res.render("custom_delete", { data });
+  } catch (err) {
+    return res.json({ message: "Invalid ID or User is Deleted" });
+  }
+});
 
 // post routes start here
 
@@ -65,4 +80,22 @@ app.post("/final_login", async (req, res) => {
     return res.json({ message: "Wrong Last Name" });
   }
   return res.send(data);
+});
+
+app.post("/admin_login", async (req, res) => {
+  let data = await User.findOne({
+    username: req.body.username,
+    password: req.body.password,
+  });
+  if (!data) {
+    return res.json({
+      message: "Wrong Password",
+    });
+  }
+  let allStudents = await User.find({});
+  return res.render("admin_d1", { allStudents });
+});
+app.post("/admin_delete/:id", async (req, res) => {
+  await User.deleteOne({ _id: req.params.id });
+  return res.json({ message: `User with id=${req.params.id} Deleted` });
 });
