@@ -96,6 +96,10 @@ app.post("/admin_login", async (req, res) => {
   return res.render("admin_d1", { allStudents });
 });
 app.post("/admin_delete/:id", async (req, res) => {
-  await User.deleteOne({ _id: req.params.id });
-  return res.json({ message: `User with id=${req.params.id} Deleted` });
+  try {
+    await User.deleteOne({ _id: req.params.id });
+    return res.json({ message: `User with id=${req.params.id} Deleted` });
+  } catch (err) {
+    return res.status(400).json({ message: "Something went wrong!" });
+  }
 });
