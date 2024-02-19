@@ -103,3 +103,7 @@ app.post("/admin_delete/:id", async (req, res) => {
     return res.status(400).json({ message: "Something went wrong!" });
   }
 });
+// 404 route
+app.get("*", (req, res) => {
+  return res.render("404");
+});
